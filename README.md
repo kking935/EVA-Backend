@@ -2,10 +2,6 @@
 
 This is the backend API for MASLOW, using FastAPI and Python.
 
-## TODO
-
-Fix AWS integration to use non-root account!
-
 ## Resources
 
 [FastAPI Docs](https://fastapi.tiangolo.com/)
