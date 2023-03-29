@@ -8,12 +8,13 @@ This file defines the API endpoints related to user data, such as:
 It interacts with the repository layer to retrieve and store user data.
 """
 
-from typing import Dict
+from typing import Dict, List
 from app.helpers.form import decode_form
 from fastapi import APIRouter, HTTPException, Body
 from fastapi.responses import RedirectResponse
 
 from app.domain.users import UsersDomain, UsersModel, ReportsModel
+from app.domain.users import EntryModel
 
 class UsersRouter:
     def __init__(self, users_domain: UsersDomain) -> None:
@@ -50,14 +51,23 @@ class UsersRouter:
             return self.__users_domain.create_user(users_model)
         
         @api_router.post('/{user_uid}/reports/create')
-        def create_report(user_uid: str, body: str = Body(...)):
+        def create_report(user_uid: str, form: List[EntryModel]):
             try:
-                form_data = decode_form(body)
-                rid = self.__users_domain.create_report(user_uid, form_data)
-                # Redirect the client to your Next.js webpage
-                return RedirectResponse(url=f"http://localhost:3000/report?id={rid}")
+                print("Form: ", form)
+                rid = self.__users_domain.create_report(user_uid, form)
+                return rid
             except KeyError:
                 raise HTTPException(status_code=400, detail='No user found')
+            
+#          @api_router.post('/{user_uid}/reports/create')
+# -        def create_report(user_uid: str, body: str = Body(...)):
+#              try:
+# -                form_data = decode_form(body)
+# -                rid = self.__users_domain.create_report(user_uid, form_data)
+#                  # Redirect the client to your Next.js webpage
+# -                return RedirectResponse(url=f"http://localhost:3000/report?id={rid}")
+#              except KeyError:
+#                  raise HTTPException(status_code=400, detail='No user found')
 
         @api_router.put('/update')
         def update_user(users_model: UsersModel):

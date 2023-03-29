@@ -38,7 +38,18 @@ class UsersRepository:
         response = table.put_item(Item=user)    # create user
         return response                         # return response from dynamodb
 
+    def user_exists(self, uid: str) -> bool:
+        try:
+            table = self.__db.Table('Users')
+            response = table.get_item(Key={'uid': uid})
+            return 'Item' in response  # return True if the user exists, False otherwise
+        except ClientError as e:
+            raise ValueError(e.response['Error']['Message'])
+
     def create_report(self, user_uid: str, new_report: dict):
+        if not self.user_exists(user_uid):
+            self.create_user({'uid': user_uid, 'fname': 'None', 'lname': 'None', 'reports': {}})
+
         # TODO: Improve this ?
         table = self.__db.Table('Users')
         response = table.update_item(

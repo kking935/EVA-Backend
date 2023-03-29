@@ -11,15 +11,25 @@ def decode_form(form):
     except Exception as e:
         return e
     
-def build_survey(form_data):
+def build_survey(form):
     survey = {}
-    cur_question = 1
-    while f"question-{cur_question}" in form_data:
-        survey[str(cur_question)] = {
-            "question_id": str(cur_question),
-            "question": SDOH_QUESTIONS[cur_question - 1]['question'],
-            "answer": form_data[f"question-{cur_question}"]
-            # "answer": deidentify_data(form_data[f"question-{cur_question}"])
+    for entry in form:
+        survey[str(entry.question_id)] = {
+            "question_id": str(entry.question_id),
+            "question": entry.question,
+            "answer": entry.answer
         }
-        cur_question += 1
     return survey
+
+# def build_survey(form_data):
+#     survey = {}
+#     cur_question = 1
+#     while f"question-{cur_question}" in form_data:
+#         survey[str(cur_question)] = {
+#             "question_id": str(cur_question),
+#             "question": SDOH_QUESTIONS[cur_question - 1]['question'],
+#             "answer": form_data[f"question-{cur_question}"]
+#             # "answer": deidentify_data(form_data[f"question-{cur_question}"])
+#         }
+#         cur_question += 1
+#     return survey

@@ -10,9 +10,14 @@ from app.helpers.gpt import build_report
 from pydantic import Field
 from pydantic import BaseModel
 # from pydantic.types import UUID4
-from typing import Optional, Dict
+from typing import List, Optional, Dict
 
 from app.repository.users import UsersRepository
+
+class EntryModel(BaseModel):
+    question_id: str = Field(..., example='1')
+    question: str = Field(..., example='What is your name?')
+    answer: str = Field(..., example='Ken')
 
 class ReportsModel(BaseModel):
     rid: Optional[str] = None
@@ -43,12 +48,12 @@ class UsersDomain():
         user.uid = str(uuid4())
         return self.__repository.create_user(user.dict())
     
-    def create_report(self, user_uid: str, form_data):
+    def create_report(self, user_uid: str, form: List[EntryModel]):
         rid = str(uuid4())
         report: ReportsModel = {
             "rid": rid,
             "summary": '',
-            "survey": build_survey(form_data)
+            "survey": build_survey(form)
         }
         build_report(report)
         response = self.__repository.create_report(user_uid, report)
