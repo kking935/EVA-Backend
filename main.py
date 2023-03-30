@@ -72,6 +72,10 @@ app.include_router(users_router.router)
 def index():
     return 'Hello from the MASLOW API'
 
+@app.get('/test')
+def testRoute():
+    return {"text": "This is a test route version 1."}
+
 @app.exception_handler(StarletteHTTPException)
 async def http_exception_handler(request, exc):
     message = str(exc.detail)
