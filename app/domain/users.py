@@ -1,18 +1,9 @@
-"""
-This file defines the user-related models and business rules that are used throughout the application.
-It defines the properties and methods of a user object, as well as the rules and constraints that apply to user data.
-It is used by the API routers and repository layer to ensure that user data is stored and retrieved correctly.
-"""
-
 from uuid import uuid4
-from app.helpers.form import build_survey
-from app.helpers.gpt import build_report
-from pydantic import Field
-from pydantic import BaseModel
-# from pydantic.types import UUID4
+from pydantic import Field, BaseModel
 from typing import List, Optional, Dict
 
-from app.repository.users import UsersRepository
+from ..utils.gpt import build_report
+from ..repository.users import UsersRepository
 
 class EntryModel(BaseModel):
     question_id: str = Field(..., example='1')
@@ -50,12 +41,7 @@ class UsersDomain():
     
     def create_report(self, user_uid: str, form: List[EntryModel]):
         rid = str(uuid4())
-        report: ReportsModel = {
-            "rid": rid,
-            "summary": '',
-            "survey": build_survey(form)
-        }
-        build_report(report)
+        report: ReportsModel = build_report(form, rid)
         response = self.__repository.create_report(user_uid, report)
         return rid
 

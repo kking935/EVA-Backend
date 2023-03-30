@@ -1,6 +1,5 @@
 from pydantic import BaseSettings, validator
 
-
 class Settings(BaseSettings):
     auth0_audience: str
     auth0_domain: str

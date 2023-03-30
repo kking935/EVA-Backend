@@ -1,14 +1,11 @@
 from dataclasses import dataclass
-
 import jwt
-from app.auth.config import settings
-from app.auth.custom_exceptions import BadCredentialsException, UnableCredentialsException
-
+from .config import settings
+from .custom_exceptions import BadCredentialsException, UnableCredentialsException
 
 @dataclass
 class JsonWebToken:
     """Perform JSON Web Token (JWT) validation using PyJWT"""
-
     jwt_access_token: str
     auth0_issuer_url: str = f"https://{settings.auth0_domain}/"
     auth0_audience: str = settings.auth0_audience

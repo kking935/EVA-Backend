@@ -1,0 +1,8 @@
+{
+  "name": "eva-serverless-backend",
+  "version": "1.0.0",
+  "author": "Ken King",
+  "dependencies": {
+    "serverless-python-requirements": "^6.0.0"
+  }
+}

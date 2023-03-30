@@ -3,7 +3,6 @@ This file handles the data storage and retrieval for the user data using the dat
 It defines methods for creating, retrieving, updating, and deleting user data.
 It interacts with the database to store and retrieve data.
 """
-
 from boto3.resources.base import ServiceResource
 from boto3.dynamodb.conditions import Key
 from botocore.exceptions import ClientError
@@ -13,15 +12,15 @@ class UsersRepository:
         self.__db = db      # db resource will be injected when this repository is created in the main.py
 
     def get_all(self):
-        table = self.__db.Table('Users')    # referencing to table Users
-        response = table.scan()             # scan all data
-        return response.get('Items', [])    # return data
+        table = self.__db.Table('Users')    
+        response = table.scan()             
+        return response.get('Items', [])    
 
     def get_user(self, uid: str):
         try:
-            table = self.__db.Table('Users')                # referencing to table Users
-            response = table.get_item(Key={'uid': uid})     # get user using uid (partition key)
-            return response['Item']                         # return single data
+            table = self.__db.Table('Users')                
+            response = table.get_item(Key={'uid': uid})     
+            return response['Item']                         
         except ClientError as e:
             raise ValueError(e.response['Error']['Message'])
 
@@ -34,9 +33,9 @@ class UsersRepository:
             raise ValueError(e.response['Error']['Message'])
 
     def create_user(self, user: dict):
-        table = self.__db.Table('Users')        # referencing to table Users
-        response = table.put_item(Item=user)    # create user
-        return response                         # return response from dynamodb
+        table = self.__db.Table('Users')        
+        response = table.put_item(Item=user)    
+        return response                         
 
     def user_exists(self, uid: str) -> bool:
         try:

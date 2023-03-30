@@ -1,0 +1,48 @@
+org: kking935
+app: evavirtualassistant
+service: eva-serverless-backend
+
+package:
+  individually: true
+
+provider:
+  name: aws
+  runtime: python3.9
+  region: us-east-1
+  stage: ${opt:stage, "dev"}
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+    layer:
+      name: eva-serverless-backend-layer
+      description: Eva serverless backend layer
+      compatibleRuntimes:
+        - python3.9
+
+functions:
+  app:
+    package:
+      patterns:
+        - "!requirements.txt"
+        - "!package.json"
+        - "!package-lock.json"
+        - "!.serverless/**"
+        - "!myenv/**"
+        - "!node_modules/**"
+        - "!.env"
+        - "main.py"
+        - "app"
+
+    handler: main.handler
+    environment:
+      STAGE: ${self:provider.stage}
+    layers:
+      - { Ref: PythonRequirementsLambdaLayer }
+    events:
+      - http:
+          method: any
+          path: /{proxy+}
