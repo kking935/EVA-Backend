@@ -1,6 +1,8 @@
 fastapi
 uvicorn
 boto3
+mangum
+openai
 python-dotenv
 cryptography==38.0.1
 PyJWT==2.4.0

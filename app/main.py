@@ -5,6 +5,7 @@ It initializes the FastAPI app and imports the API routers.
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from mangum import Mangum
 
 # Auth Imports
 # -----------------
@@ -116,3 +117,5 @@ if __name__ == "__main__":
         reload=True,
         server_header=False,
     )
+
+handler = Mangum(app)
