@@ -37,13 +37,29 @@ async def set_secure_headers(request, call_next):
     secure_headers.framework.fastapi(response)
     return response
 
+origins = [
+    "http://localhost",
+    "http://localhost/",
+    "https://localhost",
+    "https://localhost/",
+    "http://localhost:3000",
+    "http://localhost:3000/",
+    "https://localhost:3000",
+    "https://localhost:3000/",
+    "http://eva-ai.vercel.app",
+    "http://eva-ai.vercel.app/",
+    "https://eva-ai.vercel.app",
+    "https://eva-ai.vercel.app/",
+    "https://eva-ai.vercel.app/survey",
+    "https://eva-ai.vercel.app/report"
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # settings.client_origin_url
-    allow_methods=["*"], # "GET"
-    allow_headers=["Authorization", "Content-Type"],
+    allow_origins=origins,
     allow_credentials=True,
-    max_age=86400,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["*"],
 )
 
 db = initialize_db()
