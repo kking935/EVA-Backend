@@ -1,3 +1,6 @@
+'''
+This file handles connecting to the DynamoDB database.
+'''
 import os
 import boto3
 import pathlib

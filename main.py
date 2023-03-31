@@ -1,20 +1,24 @@
 import os
 from mangum import Mangum
 import uvicorn
-from fastapi import FastAPI, Depends, Request
+from fastapi import FastAPI, Depends, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from starlette.exceptions import HTTPException as StarletteHTTPException
 import secure
 
-from app.auth.config import settings
-from app.auth.dependencies import validate_token
+from app.auth.auth_handler import validate_token
 from app.internal.db import initialize_db
 from app.domain.users import UsersDomain
 from app.repository.users import UsersRepository
 from app.routers.users import UsersRouter
 
-stage = os.environ.get('STAGE', None)
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+stage = os.environ.get("STAGE", None)
+port = int(os.environ.get("PORT", 5000))
+
 root_path = f"/{stage}" if stage else "/"
 
 app = FastAPI(title="EVA API", root_path=root_path)
@@ -70,35 +74,22 @@ app.include_router(users_router.router)
 
 @app.get('/')
 def index():
-    return 'Hello from the MASLOW API'
+    return 'EVA Root API'
 
-@app.get('/test')
-def testRoute():
-    return {"text": "This is a test route version 1."}
+@app.get("/authorized", dependencies=[Depends(validate_token)])
+def authorized(request: Request):
+    return {"text": f"You are authorized, your user id is {request.state.payload['sub']}"}
 
-@app.exception_handler(StarletteHTTPException)
+@app.exception_handler(HTTPException)
 async def http_exception_handler(request, exc):
     message = str(exc.detail)
     return JSONResponse({"message": message}, status_code=exc.status_code)
-
-@app.get("/api/messages/public")
-def public():
-    return {"text": "This is a public message."}
-
-@app.get("/api/messages/protected", dependencies=[Depends(validate_token)])
-def protected(request: Request):
-    print(request.state.payload)
-    return {"text": f"This is a protected message, your user id is {request.state.payload['sub']}"}
-
-@app.get("/api/messages/admin", dependencies=[Depends(validate_token)])
-def admin():
-    return {"text": "This is an admin message."}
 
 if __name__ == "__main__":
     uvicorn.run(
         "main:app",
         host="0.0.0.0",
-        port=settings.port,
+        port=port,
         log_level="info",
         reload=True,
         server_header=False,

@@ -1,9 +1,15 @@
+'''
+This file serves as a middleman between the router layer and the repository layer.
+It receives requests from the router layer, handles the corresponding business logic,
+and sends requests to the repository layer based on data that needs to be stored or 
+retrieved from the database.
+'''
 from uuid import uuid4
 from pydantic import Field, BaseModel
 from typing import List, Optional, Dict
 
-from ..utils.gpt import build_report
 from ..repository.users import UsersRepository
+from ..utils.gpt_handler import build_report
 
 class EntryModel(BaseModel):
     question_id: str = Field(..., example='1')

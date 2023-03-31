@@ -1,9 +1,13 @@
+'''
+This file handles all interactions with the OpenAI API,
+including the prompting, decoding of responses, and building the report.
+'''
 import os
 from dotenv import load_dotenv
 import openai
 
-from ..data.sdoh_domains import SDOH_DOMAINS
-from ..data.settings import INITIAL_SYSTEM_PROMPT, INITIAL_QA_EXAMPLES, MODEL, MAX_TOKENS, TEMPERATURE
+from ..config.sdoh_domains import SDOH_DOMAINS
+from ..config.gpt_settings import INITIAL_SYSTEM_PROMPT, INITIAL_QA_EXAMPLES, MODEL, MAX_TOKENS, TEMPERATURE
 
 load_dotenv()
 openai.api_key = os.environ.get("OPENAI_API_KEY")

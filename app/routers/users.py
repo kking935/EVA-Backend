@@ -1,15 +1,9 @@
 """
-This file defines the API endpoints related to user data, such as:
-- creating a new user, 
-- retrieving user information, 
-- updating user information, and
-- deleting a user. 
-
-It interacts with the repository layer to retrieve and store user data.
+This file handles the User API endpoints (such as CRUD operations).
+It passes request data to the domain layer and returns the response.
 """
-from typing import Dict, List
+from typing import List
 from fastapi import APIRouter, HTTPException
-
 from ..domain.users import UsersDomain, UsersModel, EntryModel
 
 class UsersRouter:
@@ -22,7 +16,7 @@ class UsersRouter:
         
         @api_router.get('/')
         def index_route():
-            return 'Hello from the MASLOW API Users Route'
+            return 'EVA API Users Route'
         
         @api_router.get('/all')
         def get_all():
