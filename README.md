@@ -5,8 +5,8 @@ This is the backend API for EVA, using FastAPI and Python.
 ## Overview
 
 The most significant file is the GPT handler, which is responsible for handling all prompts,
-decoding all responses, and building the report. It can be found [here](/app/utils/gpt_hander.py).
-Additionally, the entire prompting behavior is configurable and can be modified by changing the 
+decoding all responses, and building the report. It can be found [here](/app/utils/gpt_handler.py).
+Additionally, the entire prompting behavior is configurable and can be modified by changing the
 values in the config directory found [here](/app/config).
 
 ## Resources
