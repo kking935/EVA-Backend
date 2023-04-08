@@ -4,7 +4,7 @@ It passes request data to the domain layer and returns the response.
 """
 from typing import List
 from fastapi import APIRouter, HTTPException
-from ..domain.users import UsersDomain, UsersModel, EntryModel
+from ..domain.users import UsersDomain, UsersModel
 
 class UsersRouter:
     def __init__(self, users_domain: UsersDomain) -> None:
@@ -22,38 +22,19 @@ class UsersRouter:
         def get_all():
             return self.__users_domain.get_all()    
 
-        @api_router.get('/{user_uid}')
-        def get_user(user_uid: str):
+        @api_router.get('/{uid}')
+        def get_user(uid: str):
             try:
-                return self.__users_domain.get_user(user_uid)
+                return self.__users_domain.get_user(uid)
             except KeyError:
                 raise HTTPException(status_code=400, detail='No user found')
-
-        @api_router.get('/{user_uid}/reports/{report_uid}')
-        def get_report(user_uid: str, report_uid: str):
-            try:
-                return self.__users_domain.get_report(user_uid, report_uid)
-            except KeyError:
-                raise HTTPException(status_code=400, detail='No report found')
 
         @api_router.post('/create')
         def create_user(users_model: UsersModel):
             return self.__users_domain.create_user(users_model)
         
-        @api_router.post('/{user_uid}/reports/create')
-        def create_report(user_uid: str, form: List[EntryModel]):
-            try:
-                rid = self.__users_domain.create_report(user_uid, form)
-                return rid
-            except KeyError:
-                raise HTTPException(status_code=400, detail='No user found')
-            
-        @api_router.put('/update')
-        def update_user(users_model: UsersModel):
-            return self.__users_domain.update_user(users_model)
-
-        @api_router.delete('/delete/{user_uid}')
-        def delete_user(user_uid: str):
-            return self.__users_domain.delete_user(user_uid)
+        @api_router.delete('/delete/{uid}')
+        def delete_user(uid: str):
+            return self.__users_domain.delete_user(uid)
 
         return api_router

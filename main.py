@@ -1,16 +1,21 @@
 import os
 from mangum import Mangum
 import uvicorn
-from fastapi import FastAPI, Depends, Request, HTTPException
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import secure
 
-from app.auth.auth_handler import validate_token
 from app.internal.db import initialize_db
 from app.domain.users import UsersDomain
 from app.repository.users import UsersRepository
 from app.routers.users import UsersRouter
+from app.domain.reports import ReportsDomain
+from app.repository.reports import ReportsRepository
+from app.routers.reports import ReportsRouter
+from app.domain.questions import QuestionsDomain
+from app.repository.questions import QuestionsRepository
+from app.routers.questions import QuestionsRouter
 
 import os
 from dotenv import load_dotenv
@@ -72,13 +77,19 @@ users_domain = UsersDomain(users_repository)
 users_router = UsersRouter(users_domain)
 app.include_router(users_router.router)
 
+reports_repository = ReportsRepository(db)
+reports_domain = ReportsDomain(reports_repository)
+reports_router = ReportsRouter(reports_domain)
+app.include_router(reports_router.router)
+
+questions_repository = QuestionsRepository(db)
+questions_domain = QuestionsDomain(questions_repository)
+questions_router = QuestionsRouter(questions_domain)
+app.include_router(questions_router.router)
+
 @app.get('/')
 def index():
     return 'EVA Root API'
-
-@app.get("/authorized", dependencies=[Depends(validate_token)])
-def authorized(request: Request):
-    return {"text": f"You are authorized, your user id is {request.state.payload['sub']}"}
 
 @app.exception_handler(HTTPException)
 async def http_exception_handler(request, exc):
@@ -92,7 +103,6 @@ if __name__ == "__main__":
         port=port,
         log_level="info",
         reload=True,
-        server_header=False,
     )
 
 handler = Mangum(app)
