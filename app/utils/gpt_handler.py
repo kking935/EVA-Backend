@@ -60,8 +60,8 @@ def build_risk_factors(survey, messages):
     overall_risk_factors = {}
     for question_obj in survey.values():
         messages += [
-            {"role": "user", "content": f"Question {question_obj['question_id']}: {question_obj['question']}"}, 
-            {"role": "user", "content": f"Answer {question_obj['question_id']}: {question_obj['answer']}"}
+            {"role": "user", "content": f"Question {question_obj['qid']}: {question_obj['question']}"}, 
+            {"role": "user", "content": f"Answer {question_obj['qid']}: {question_obj['answer']}"}
         ]
         response_message = handle_new_messages(messages)
         risk_factors = decode_risk_factors(response_message)
@@ -76,16 +76,9 @@ def build_summary(messages):
     summary = handle_new_messages(messages)
     return summary
 
-def build_report(form, rid):
-    survey = {}
-    for entry in form:
-        survey[str(entry.question_id)] = {
-            "question_id": str(entry.question_id),
-            "question": entry.question,
-            "answer": entry.answer
-        }
+def build_report(survey_obj):
+    survey = survey_obj['survey']
     report = {
-        "rid": rid,
         "summary": '',
         "survey": survey
     }

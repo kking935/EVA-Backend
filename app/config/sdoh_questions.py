@@ -1,307 +1,311 @@
 SDOH_QUESTIONS = [
   {
-    "question_id": 1,
+    "qid": 1,
     "question": "Can you describe your current living situation, such as whether you live alone, with family, or in a care facility?",
-    "sdoh_domains": [
+    "labels": [
       {
-        "domain": "Neighborhood and Built Environment",
-        "domain_id": 40,
-        "subdomains": [
+        "label": "Neighborhood and Built Environment",
+        "lid": 40,
+        "sublabels": [
           {
-            "subdomain": "Quality of Housing",
-            "subdomain_id": 44
+            "sublabel": "Quality of Housing",
+            "slid": 44
           }
         ]
       }
     ]
   },
   {
-    "question_id": 2,
+    "qid": 2,
     "question": "Do you have access to transportation that allows you to easily get to places you need to go, such as medical appointments or grocery stores?",
-    "sdoh_domains": [
+    "labels": [
       {
-        "domain": "Neighborhood and Built Environment",
-        "domain_id": 40,
-        "subdomains": [
+        "label": "Neighborhood and Built Environment",
+        "lid": 40,
+        "sublabels": [
           {
-            "subdomain": "Environmental Conditions",
-            "subdomain_id": 43
+            "sublabel": "Environmental Conditions",
+            "slid": 43
           }
         ]
       }
     ]
   },
   {
-    "question_id": 3,
+    "qid": 3,
     "question": "Are you able to access healthy and affordable food options in your community?",
-    "sdoh_domains": [
+    "labels": [
       {
-        "domain": "Neighborhood and Built Environment",
-        "domain_id": 40,
-        "subdomains": [
+        "label": "Neighborhood and Built Environment",
+        "lid": 40,
+        "sublabels": [
           {
-            "subdomain": "Access to Foods That Support Healthy Dietary Patterns",
-            "subdomain_id": 41
+            "sublabel": "Access to Foods That Support Healthy Dietary Patterns",
+            "slid": 41
           }
         ]
       }
     ]
   },
   {
-    "question_id": 4,
+    "qid": 4,
     "question": "Do you have a support system of friends, family, or community groups that you can rely on for help and companionship?",
-    "sdoh_domains": [
+    "labels": [
       {
-        "domain": "Social and Community Context",
-        "domain_id": 50,
-        "subdomains": [
+        "label": "Social and Community Context",
+        "lid": 50,
+        "sublabels": [
           {
-            "subdomain": "Social Cohesion",
-            "subdomain_id": 54
+            "sublabel": "Social Cohesion",
+            "slid": 54
           }
         ]
       }
     ]
   },
   {
-    "question_id": 5,
+    "qid": 5,
     "question": "Do you have a regular source of income and access to financial resources?",
-    "sdoh_domains": [
+    "labels": [
       {
-        "domain": "Economic Stability",
-        "domain_id": 10,
-        "subdomains": [
+        "label": "Economic Stability",
+        "lid": 10,
+        "sublabels": [
           {
-            "subdomain": "Poverty",
-            "subdomain_id": 14
+            "sublabel": "Poverty",
+            "slid": 14
           },
           {
-            "subdomain": "Employment",
-            "subdomain_id": 11
+            "sublabel": "Employment",
+            "slid": 11
           },
           {
-            "subdomain": "Food Insecurity",
-            "subdomain_id": 12
+            "sublabel": "Food Insecurity",
+            "slid": 12
           },
           {
-            "subdomain": "Housing Instability",
-            "subdomain_id": 13
+            "sublabel": "Housing Instability",
+            "slid": 13
           }
         ]
       }
     ]
   },
+]
+
+"""
   {
-    "question_id": 6,
+    "qid": 6,
     "question": "Do you have access to transportation that allows you to easily get to places you need to go, such as medical appointments or grocery stores?",
-    "sdoh_domains": [
+    "labels": [
       {
-        "domain": "Neighborhood and Built Environment",
-        "domain_id": 40,
-        "subdomains": [
+        "label": "Neighborhood and Built Environment",
+        "lid": 40,
+        "sublabels": [
           {
-            "subdomain": "Environmental Conditions",
-            "subdomain_id": 43
+            "sublabel": "Environmental Conditions",
+            "slid": 43
           }
         ]
       },
       {
-        "domain": "Economic Stability",
-        "domain_id": 10,
-        "subdomains": [
+        "label": "Economic Stability",
+        "lid": 10,
+        "sublabels": [
           {
-            "subdomain": "Employment",
-            "subdomain_id": 11
+            "sublabel": "Employment",
+            "slid": 11
           }
         ]
       },
       {
-        "domain": "Health Care Access and Quality",
-        "domain_id": 30,
-        "subdomains": [
+        "label": "Health Care Access and Quality",
+        "lid": 30,
+        "sublabels": [
           {
-            "subdomain": "Access to Health Services",
-            "subdomain_id": 31
+            "sublabel": "Access to Health Services",
+            "slid": 31
           }
         ]
       }
     ]
   },
   {
-    "question_id": 7,
+    "qid": 7,
     "question": "Do you have any chronic health conditions or disabilities that impact your daily life?",
-    "sdoh_domains": [
+    "labels": [
       {
-        "domain": "Health Care Access and Quality",
-        "domain_id": 30,
-        "subdomains": []
+        "label": "Health Care Access and Quality",
+        "lid": 30,
+        "sublabels": []
       }
     ]
   },
   {
-    "question_id": 8,
+    "qid": 8,
     "question": "Do you feel safe and secure in your home and community?",
-    "sdoh_domains": [
+    "labels": [
       {
-        "domain": "Neighborhood and Built Environment",
-        "domain_id": 40,
-        "subdomains": [
+        "label": "Neighborhood and Built Environment",
+        "lid": 40,
+        "sublabels": [
           {
-            "subdomain": "Crime and Violence",
-            "subdomain_id": 42
+            "sublabel": "Crime and Violence",
+            "slid": 42
           }
         ]
       },
       {
-        "domain": "Social and Community Context",
-        "domain_id": 50,
-        "subdomains": [
+        "label": "Social and Community Context",
+        "lid": 50,
+        "sublabels": [
           {
-            "subdomain": "Social Cohesion",
-            "subdomain_id": 54
+            "sublabel": "Social Cohesion",
+            "slid": 54
           }
         ]
       }
     ]
   },
   {
-    "question_id": 9,
+    "qid": 9,
     "question": "Do you have access to technology and the internet, and do you feel comfortable using it?",
-    "sdoh_domains": [
+    "labels": [
       {
-        "domain": "Neighborhood and Built Environment",
-        "domain_id": 40,
-        "subdomains": [
+        "label": "Neighborhood and Built Environment",
+        "lid": 40,
+        "sublabels": [
           {
-            "subdomain": "Environmental Conditions",
-            "subdomain_id": 43
+            "sublabel": "Environmental Conditions",
+            "slid": 43
           }
         ]
       },
       {
-        "domain": "Social and Community Context",
-        "domain_id": 50,
-        "subdomains": []
+        "label": "Social and Community Context",
+        "lid": 50,
+        "sublabels": []
       }
     ]
   },
   {
-    "question_id": 10,
+    "qid": 10,
     "question": "Are there any activities or interests that you enjoy participating in that bring you a sense of purpose and fulfillment?",
-    "sdoh_domains": [
+    "labels": [
       {
-        "domain": "Social and Community Context",
-        "domain_id": 50,
-        "subdomains": [
+        "label": "Social and Community Context",
+        "lid": 50,
+        "sublabels": [
           {
-            "subdomain": "Civic Participation",
-            "subdomain_id": 51
+            "sublabel": "Civic Participation",
+            "slid": 51
           }
         ]
       }
     ]
   },
   {
-    "question_id": 11,
+    "qid": 11,
     "question": "What is your highest level of education achieved?",
-    "sdoh_domains": [
+    "labels": [
       {
-        "domain": "Education Access and Quality",
-        "domain_id": 20,
-        "subdomains": []
+        "label": "Education Access and Quality",
+        "lid": 20,
+        "sublabels": []
       }
     ]
   },
   {
-    "question_id": 12,
+    "qid": 12,
     "question": "What is your current occupation?",
-    "sdoh_domains": [
+    "labels": [
       {
-        "domain": "Economic Stability",
-        "domain_id": 10,
-        "subdomains": [
+        "label": "Economic Stability",
+        "lid": 10,
+        "sublabels": [
           {
-            "subdomain": "Employment",
-            "subdomain_id": 11
+            "sublabel": "Employment",
+            "slid": 11
           }
         ]
       }
     ]
   },
   {
-    "question_id": 13,
+    "qid": 13,
     "question": "Are you satisfied with your current housing situation?",
-    "sdoh_domains": [
+    "labels": [
       {
-        "domain": "Neighborhood and Built Environment",
-        "domain_id": 40,
-        "subdomains": [
+        "label": "Neighborhood and Built Environment",
+        "lid": 40,
+        "sublabels": [
           {
-            "subdomain": "Quality of Housing",
-            "subdomain_id": 44
+            "sublabel": "Quality of Housing",
+            "slid": 44
           }
         ]
       }
     ]
   },
   {
-    "question_id": 14,
+    "qid": 14,
     "question": "Have you experienced racism or discrimination in your life?",
-    "sdoh_domains": [
+    "labels": [
       {
-        "domain": "Social and Community Context",
-        "domain_id": 50,
-        "subdomains": [
+        "label": "Social and Community Context",
+        "lid": 50,
+        "sublabels": [
           {
-            "subdomain": "Discrimination",
-            "subdomain_id": 52
+            "sublabel": "Discrimination",
+            "slid": 52
           }
         ]
       }
     ]
   },
   {
-    "question_id": 15,
+    "qid": 15,
     "question": "Do you feel that your neighborhood and community provide adequate access to resources and support for your health and well-being?",
-    "sdoh_domains": [
+    "labels": [
       {
-        "domain": "Neighborhood and Built Environment",
-        "domain_id": 40,
-        "subdomains": [
+        "label": "Neighborhood and Built Environment",
+        "lid": 40,
+        "sublabels": [
           {
-            "subdomain": "Access to Foods That Support Healthy Dietary Patterns",
-            "subdomain_id": 41
+            "sublabel": "Access to Foods That Support Healthy Dietary Patterns",
+            "slid": 41
           },
           {
-            "subdomain": "Environmental Conditions",
-            "subdomain_id": 43
+            "sublabel": "Environmental Conditions",
+            "slid": 43
           }
         ]
       },
       {
-        "domain": "Health Care Access and Quality",
-        "domain_id": 30,
-        "subdomains": [
+        "label": "Health Care Access and Quality",
+        "lid": 30,
+        "sublabels": [
           {
-            "subdomain": "Access to Health Services",
-            "subdomain_id": 31
+            "sublabel": "Access to Health Services",
+            "slid": 31
           },
           {
-            "subdomain": "Health Literacy",
-            "subdomain_id": 33
+            "sublabel": "Health Literacy",
+            "slid": 33
           }
         ]
       },
       {
-        "domain": "Social and Community Context",
-        "domain_id": 50,
-        "subdomains": [
+        "label": "Social and Community Context",
+        "lid": 50,
+        "sublabels": [
           {
-            "subdomain": "Social Cohesion",
-            "subdomain_id": 54
+            "sublabel": "Social Cohesion",
+            "slid": 54
           }
         ]
       }
     ]
   }
 ]
+"""
