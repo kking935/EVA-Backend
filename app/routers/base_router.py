@@ -19,7 +19,7 @@ def create_base_router(
     def get_all():
         return domain.get_all()    
 
-    @base_router.get('/{id}', response_model=model)
+    @base_router.get('/{id}') # TODO: Fix this -> , response_model=model)
     def get(id: str):
         try:
             return domain.get(id)
