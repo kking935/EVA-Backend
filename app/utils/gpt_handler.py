@@ -6,6 +6,8 @@ import os
 from dotenv import load_dotenv
 import openai
 
+from app.models import SurveyModel, SurveyQuestion
+
 from ..config.sdoh_domains import SDOH_DOMAINS
 from ..config.gpt_settings import INITIAL_SYSTEM_PROMPT, INITIAL_QA_EXAMPLES, MODEL, MAX_TOKENS, TEMPERATURE
 
@@ -56,18 +58,35 @@ def decode_risk_factors(response):
                 risk_factors[domain].add(subdomain)
     return risk_factors
 
-def build_risk_factors(survey, messages):
-    overall_risk_factors = {}
-    for question_obj in survey.values():
-        messages += [
-            {"role": "user", "content": f"Question {question_obj['qid']}: {question_obj['question']}"}, 
-            {"role": "user", "content": f"Answer {question_obj['qid']}: {question_obj['answer']}"}
-        ]
-        response_message = handle_new_messages(messages)
-        risk_factors = decode_risk_factors(response_message)
-        question_obj['risk_factors'] = risk_factors
-        overall_risk_factors = {key: overall_risk_factors.get(key, set()) | risk_factors.get(key, set()) for key in set(overall_risk_factors.keys()) | set(risk_factors.keys())}
-    return overall_risk_factors
+# def build_risk_factors(survey, messages):
+#     overall_risk_factors = {}
+#     for question_obj in survey.values():
+#         messages += [
+#             {"role": "user", "content": f"Question {question_obj.qid}: {question_obj['question']}"}, 
+#             {"role": "user", "content": f"Answer {question_obj.qid}: {question_obj['answer']}"}
+#         ]
+#         response_message = handle_new_messages(messages)
+#         risk_factors = decode_risk_factors(response_message)
+#         question_obj['risk_factors'] = risk_factors
+#         overall_risk_factors = {key: overall_risk_factors.get(key, set()) | risk_factors.get(key, set()) for key in set(overall_risk_factors.keys()) | set(risk_factors.keys())}
+#     return overall_risk_factors
+
+def generate_individual_risks(survey: SurveyModel, survey_question: SurveyQuestion):
+    survey.messages += [
+        {"role": "user", "content": f"Question {survey_question.qid}: {survey_question.question}"}, 
+        {"role": "user", "content": f"Answer {survey_question.qid}: {survey_question.answer}"}
+    ]
+    response_message = handle_new_messages(survey.messages)
+    risk_factors = decode_risk_factors(response_message)
+    survey_question.risk_factors = risk_factors
+    print(risk_factors)
+    survey.overall_risk_factors = {key: survey.overall_risk_factors.get(key, set()) | risk_factors.get(key, set()) for key in set(survey.overall_risk_factors.keys()) | set(risk_factors.keys())}
+
+def initialize_survey(survey):
+    survey.messages = build_initial_messages()
+    survey.overall_risk_factors = {}
+    survey.summary = ""
+    return survey
 
 def build_summary(messages):
     messages += [
@@ -76,13 +95,6 @@ def build_summary(messages):
     summary = handle_new_messages(messages)
     return summary
 
-def build_report(survey_obj):
-    survey = survey_obj['survey']
-    report = {
-        "summary": '',
-        "survey": survey
-    }
-    report['messages'] = build_initial_messages()
-    report['overall_risk_factors'] = build_risk_factors(report['survey'], report['messages'])
-    report['summary'] = build_summary(report['messages'])
-    return report
+def finalize_survey(survey: SurveyModel):
+    survey.summary = build_summary(survey.messages)
+    return survey

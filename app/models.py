@@ -36,6 +36,9 @@ class SurveyModel(BaseModel):
     sid: Optional[str] = None
     survey: Optional[Dict[str, SurveyQuestion]] = None
     cur_qid: Optional[str] = '1'
+    summary: Optional[str] = ""
+    overall_risk_factors: Optional[Dict] = {}
+    messages: Optional[List[Dict]] = []
 
 class Message(BaseModel):
     role: str
@@ -45,7 +48,7 @@ class ReportsModel(BaseModel):
     rid: Optional[str] = None
     survey: Dict[str, SurveyQuestion]
     messages: Optional[List[Message]] = None
-    overall_risk_factor: Optional[Dict[str, List[str]]] = Field(..., example={'risk_factor': 'high', 'risk_level': 'high'})
+    overall_risk_factors: Optional[Dict[str, List[str]]] = Field(..., example={'risk_factor': 'high', 'risk_level': 'high'})
     summary: Optional[str] = Field(..., example='Report summary')
 
 class UsersModel(BaseModel):

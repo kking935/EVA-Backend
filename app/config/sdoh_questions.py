@@ -92,7 +92,6 @@ SDOH_QUESTIONS = [
     ]
   },
 ]
-
 """
   {
     "qid": 6,
