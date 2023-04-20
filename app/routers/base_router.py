@@ -15,7 +15,7 @@ def create_base_router(
     ):
     base_router = APIRouter(prefix=f"/{item_name}", tags=[item_name])
 
-    @base_router.get('/all', response_model=List[model])
+    @base_router.get('/all') # TODO: Fix this -> , response_model=List[model])
     def get_all():
         return domain.get_all()    
 
