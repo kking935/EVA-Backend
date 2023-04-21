@@ -1,6 +1,8 @@
 from pydantic import Field, BaseModel
 from typing import Dict, List, Optional
-
+from datetime import date
+from typing import Optional
+from boto3.dynamodb.types import TypeDeserializer, TypeSerializer
 class SublabelModel(BaseModel):
     slid: str = Field(..., example='11')
     sublabel: str = Field(..., example='Poverty')
@@ -33,6 +35,7 @@ class SurveyQuestion(BaseModel):
     risk_factors: Optional[Dict] = None
 
 class SurveyModel(BaseModel):
+    created_at: Optional[str] = Field(default=str(date.today().strftime("%m/%d/%Y")))
     sid: Optional[str] = None
     survey: Optional[Dict[str, SurveyQuestion]] = None
     cur_qid: Optional[str] = '1'
@@ -45,6 +48,7 @@ class Message(BaseModel):
     content: str
 
 class ReportsModel(BaseModel):
+    created_at: Optional[str] = Field(default=str(date.today().strftime("%m/%d/%Y")))
     rid: Optional[str] = None
     survey: Dict[str, SurveyQuestion]
     messages: Optional[List[Message]] = None
