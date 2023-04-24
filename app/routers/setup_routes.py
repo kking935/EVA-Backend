@@ -4,7 +4,7 @@ from app.domain.reports import ReportsDomain
 from app.domain.surveys import SurveysDomain
 from app.models import LabelsModel, QuestionsModel, ReportsModel, SurveyModel, UsersModel
 from app.repository.base_repository import BaseRepository
-from app.repository.custom_id import CustomIdRepository, custom_label_id, custom_question_id
+from app.repository.custom_id import CustomIdRepository, custom_label_id, custom_question_id, custom_report_id
 from app.routers.base_router import create_base_router
 from app.routers.read_only import create_read_only_router
 from app.routers.surveys import create_survey_router
@@ -27,7 +27,7 @@ def setup_routes(app, db):
     users_router = create_base_router(domain=users_domain, item_name='users', model=UsersModel)
     app.include_router(users_router)
 
-    reports_repository = BaseRepository(db=db, table_name='Reports', table_key='rid')
+    reports_repository = CustomIdRepository(db=db, table_name='Reports', table_key='rid', custom_id_function=custom_report_id)
     reports_domain = ReportsDomain(repository=reports_repository)
     reports_router = create_base_router(domain=reports_domain, item_name='reports', model=ReportsModel, create_request_model=SurveyModel)
     app.include_router(reports_router)

@@ -15,3 +15,6 @@ def custom_label_id(self, item):
 
 def custom_question_id(self, item):
     item['qid'] = str(self.count() + 1)
+
+def custom_report_id(self, item):
+    item['rid'] = str(self.count() + 1)
