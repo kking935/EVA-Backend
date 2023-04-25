@@ -46,7 +46,9 @@ SDOH_QUESTIONS = [
         ]
       }
     ]
-  },
+  }
+]
+"""
   {
     "qid": 4,
     "question": "Do you have a support system of friends, family, or community groups that you can rely on for help and companionship?",
@@ -91,8 +93,6 @@ SDOH_QUESTIONS = [
       }
     ]
   },
-]
-"""
   {
     "qid": 6,
     "question": "Do you have access to transportation that allows you to easily get to places you need to go, such as medical appointments or grocery stores?",
