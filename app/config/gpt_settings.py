@@ -1,5 +1,5 @@
-# MODEL = "gpt-3.5-turbo"
-MODEL = "gpt-4"
+MODEL = "gpt-3.5-turbo"
+# MODEL = "gpt-4"
 
 # MAX_TOKENS = 100
 MAX_TOKENS = 200
