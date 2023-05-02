@@ -4,6 +4,7 @@ boto3
 mangum
 openai
 python-dotenv
+pytz
 cryptography==38.0.1
 PyJWT==2.4.0
 secure==0.3.0

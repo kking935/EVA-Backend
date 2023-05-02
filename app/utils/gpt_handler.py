@@ -28,9 +28,13 @@ def handle_new_messages(messages):
 def create_system_prompt():
     prompt = INITIAL_SYSTEM_PROMPT
     for domain_id, domain_obj in SDOH_DOMAINS.items():
-        prompt += f"{domain_obj['domain']} ({domain_id}):"
+        # prompt += f"{domain_obj['domain']} ({domain_id}):"
+        prompt += f"{domain_obj['domain']}:"
+
         for subdomain_id, subdomain_obj in domain_obj['subdomains'].items():
-            prompt += f" {subdomain_obj['subdomain']} ({subdomain_id}),"
+            # prompt += f" {subdomain_obj['subdomain']} ({subdomain_id}),"
+            prompt += f" {subdomain_obj['subdomain']},"
+
         prompt = prompt[:-1] + '. ' # remove trailing comma and add period
     return prompt[:-1] # remove trailing space
 

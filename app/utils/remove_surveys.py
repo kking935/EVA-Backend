@@ -10,6 +10,7 @@ surveys_domain = BaseDomain(repository=surveys_repository)
 
 surveys = surveys_domain.get_all()
 for question in surveys:
+    print('deleting survey...')
     surveys_domain.delete(question['sid'])
 
 
@@ -19,4 +20,5 @@ reports_domain = BaseDomain(repository=reports_repository)
 
 reports = reports_domain.get_all()
 for question in reports:
+    print('deleting survey...')
     reports_domain.delete(question['rid'])
