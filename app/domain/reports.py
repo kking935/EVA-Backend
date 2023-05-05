@@ -20,3 +20,7 @@ class ReportsDomain(BaseDomain):
         # report: ReportsModel = build_report(survey.dict())
         # return self.__repository.create(report)
         return self.__repository.create(report.dict())
+    
+    def update(self, report: ReportsModel):
+        report.verified = True
+        return self.__repository.update(report.dict())

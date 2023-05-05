@@ -55,6 +55,7 @@ class Message(BaseModel):
 class ReportsModel(BaseModel):
     # created_at: Optional[str] = Field(default=datetime.now().strftime("%m/%d/%Y at %I:%M %p"))
     created_at: Optional[str] = Field(default=datetime.now(tz).strftime("%m/%d/%Y at %I:%M %p"))
+    verified: Optional[bool] = False
     rid: Optional[str] = None
     survey: Dict[str, SurveyQuestion]
     messages: Optional[List[Message]] = None
