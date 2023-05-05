@@ -12,7 +12,8 @@ from app.routers.surveys import create_survey_router
 def setup_routes(app, db):
     questions_repository = CustomIdRepository(db=db, table_name='Questions', table_key='qid', custom_id_function=custom_question_id)
     questions_domain = BaseDomain(repository=questions_repository)
-    questions_router = create_read_only_router(domain=questions_domain, item_name='questions', model=QuestionsModel)
+    # questions_router = create_read_only_router(domain=questions_domain, item_name='questions', model=QuestionsModel)
+    questions_router = create_base_router(domain=questions_domain, item_name='questions', model=QuestionsModel)
     app.include_router(questions_router)
 
     labels_repository = CustomIdRepository(db=db, table_name='Labels', table_key='lid', custom_id_function=custom_label_id)
